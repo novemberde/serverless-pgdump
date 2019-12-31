@@ -1,0 +1,23 @@
+{
+  "name": "serverless-pgdump",
+  "version": "1.0.0",
+  "description": "Create postgres dump and restore on S3 using Lambda",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/novemberde/serverless-pgdump.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/novemberde/serverless-pgdump/issues"
+  },
+  "homepage": "https://github.com/novemberde/serverless-pgdump#readme",
+  "devDependencies": {
+    "serverless": "^1.60.4"
+  }
+}

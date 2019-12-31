@@ -1,0 +1,37 @@
+service: pg-dump
+frameworkVersion: '>=1.28.0 <2.0.0'
+
+provider:
+  name: aws
+  runtime: go1.x
+
+  # you can overwrite defaults here
+  stage: alpha-chat
+  region: ap-northeast-2
+  deploymentBucket: ${file(./.config.yml):slsBucket}
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "s3:PutObject"
+      Resource:
+        - arn:aws:s3:::${file(./.config.yml):dumpBucket}/*
+
+package:
+  exclude:
+    - ./**
+  include:
+    - ./bin/**
+    - ./pg/**
+    - ./config.yml
+
+functions:
+  hello:
+    handler: bin/main
+    events:
+      - schedule: rate(24 hours)
+    # vpc options
+    vpc:
+      securityGroupIds:
+        - ${file(./.config.yml):securityGroupId}
+      subnetIds:
+        - ${file(./.config.yml):subnetId}
